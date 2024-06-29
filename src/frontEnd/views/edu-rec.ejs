@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head') %>
+<%- include('header') %>
+
+<div class="container">
+    <h1 class="info-title">Educational Resources</h1>
+
+    <section class="resources">
+        <h2 class="resources-title">Sustainable Eating</h2>
+        <p>Learning to eat sustainably can help reduce your carbon footprint, save water, and promote a healthier
+            planet. Here are some resources to get you started:</p>
+        <ul>
+            <li class="infoLinks"><a href="https://www.ewg.org/foodnews/">EWG's Shopper's Guide to Pesticides in Produce</a></li>
+            <li class="infoLinks"><a href="https://www.fao.org/sustainability/en/">FAO's Sustainability Pathways</a></li>
+            <li class="infoLinks"><a href="https://www.sustainabletable.org.au/all-things-ethical-eating/">Sustainable Table on
+                    Ethical</a></li>
+            <li class="infoLinks"><a href="https://www.youtube.com/watch?v=oCMkKlhj-GE">University of Cambridge Sustainable Food Policy
+                    Eating (Video) </a></li>
+        </ul>
+    </section>
+
+    <section class="resources">
+        <h2 class="resources-title">Reducing Food Waste</h2>
+        <p>Reducing food waste is critical for saving resources, energy, and money. Here are tips and tricks to help you
+            waste less food:</p>
+        <ul>
+            <li class="infoLinks"><a href="https://www.epa.gov/recycle/reducing-wasted-food-home">EPA's Guide to Reducing Wasted Food at
+                    Home</a></li>
+            <li class="infoLinks"><a href="https://www.feedingamerica.org/our-work/our-approach/reduce-food-waste">Feeding America's
+                    Efforts to Reduce Food Waste</a></li>
+            <li class="infoLinks"><a href="https://www.savethefood.com/">Save the Food</a></li>
+            <li class="infoLinks"><a href="https://www.youtube.com/watch?v=8NCm2Q1rZOM"> 100 ways to reduce food waste you have to try
+                    (Video)</a></li>
+        </ul>
+    </section>
+
+    <section class="resources">
+        <h2 class="resources-title">The Importance of Nutrition</h2>
+        <p>Understanding nutrition is key to maintaining a healthy lifestyle. Learn more about nutrition and how to make
+            healthier choices:</p>
+        <ul>
+            <li class="infoLinks"><a href="https://www.choosemyplate.gov/">MyPlate</a></li>
+            <li class="infoLinks"><a href="https://www.nutrition.gov/">Nutrition.gov</a></li>
+            <li class="infoLinks"><a href="https://www.hsph.harvard.edu/nutritionsource/">The Nutrition Source by Harvard T.H. Chan School
+                    of Public Health</a></li>
+            <li class="infoLinks"><a href="https://www.youtube.com/watch?v=inEPlZZ_SfA">How The Six Basic Nutrients Affect Your Body
+                    (Video) </a></li>
+
+        </ul>
+    </section>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark');
+        }
+    });
+
+</script>
+
+</html>

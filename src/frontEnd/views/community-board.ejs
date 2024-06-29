@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head') %>
+<%- include('header') %>
+
+<div class="container">
+    <h1 class="info-title">Join the Community Board</h1>
+    <p id="description">Share your experiences, ask questions, and offer tips on reducing hunger and improving nutrition
+        within your community.</p>
+
+    <% if (user) { %>
+    <div class="post-form">
+        <h2 class="info-title">Share Your Experience or Tip</h2>
+        <form action="/community-board/post" method="POST">
+            <label for="content">Your Message:</label>
+            <textarea id="content" name="content" placeholder="Write your experience, question, or tip here..."
+                required></textarea>
+            <button type="submit">Post</button>
+        </form>
+    </div>
+    <% } else { %>
+    <p>🔔 Please <a class="comlog" href="/login">log in</a> to share your experience or tip.</p>
+    <% } %>
+
+    <div class="posts">
+        <h2 class="info-title">Community Posts</h2>
+        <% posts.forEach(function(post) { %>
+        <div class="post">
+            <p><%= post.content %></p>
+            <small>Posted by <%= post.username %> on <%= new Date(post.date).toLocaleString() %></small>
+
+            <% if (user && (user.username === post.username)) { %>
+            <div class="edit-delete-options">
+                <!-- Edit Button -->
+                <button id="edit-button-out"
+                    onclick="document.getElementById('edit-form-<%= post._id %>').style.display='block'">Edit</button>
+                <form id="edit-form-<%= post._id %>" action="/community-board/update/<%= post._id %>" method="POST"
+                    style="display:none;">
+                    <textarea class="textarea edit" name="content" required><%= post.content %></textarea>
+                    <button id="edit-button" type="submit">Update</button>
+                    <button id="cancel" type="button" onclick="this.parentElement.style.display='none'">Cancel</button>
+                </form>
+
+                <!-- Delete Button -->
+                <button id="delete-post" onclick="showConfirmationModal('<%= post._id %>')">Delete</button>
+            </div>
+            <% } %>
+
+            <% if (user) { %>
+            <button class="replybtn" onclick="toggleReplyForm('<%= post._id %>')">Reply</button>
+            <% } %>
+
+            <div id="reply-form-<%= post._id %>" style="display:none;">
+                <form action="/community-board/reply/<%= post._id %>" method="POST">
+                    <textarea class="textarea" name="content" placeholder="Write your reply here..."
+                        required></textarea>
+                    <button id="reply-edit-button" type="submit">Post Reply</button>
+                    <button id="cancel-reply" type="button"
+                        onclick="this.parentElement.style.display='none'">Cancel</button>
+                </form>
+            </div>
+
+            <% post.replies.forEach(function(reply) { %>
+            <div class="reply">
+                <p id="reply-text"><%= reply.content %></p>
+                <small>Reply by <%= reply.username %> on <%= new Date(reply.date).toLocaleString() %></small>
+                <% if (user && (user.username === reply.username || user.username === post.username)) { %>
+                <form action="/community-board/delete-reply/<%= post._id %>/<%= reply._id %>" method="POST">
+                    <button id="delete-reply" type="submit">Delete Reply</button>
+                </form>
+                <% } %>
+            </div>
+            <% }); %>
+        </div>
+        <% }); %>
+    </div>
+</div>
+<!-- Custom Confirmation Modal Placeholder (Outside the loop) -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalText">Are you sure you want to delete this post?</p>
+        <button id="confirmDelete">Yes</button>
+        <button id="cancelDelete">Cancel</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        window.toggleReplyForm = function (postId) {
+            var replyForm = document.getElementById('reply-form-' + postId);
+            replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+        }
+
+        const modal = document.getElementById('confirmationModal')
+        const confirmDelete = document.getElementById('confirmDelete')
+        const cancelDelete = document.getElementById('cancelDelete')
+        let href;
+
+        window.showConfirmationModal = function (postId) {
+            href = '/community-board/delete/' + postId
+            modal.style.display = 'block';
+        }
+
+        confirmDelete.addEventListener('click', function () {
+            modal.style.display = 'none'
+            window.location.href = href
+        })
+
+        cancelDelete.addEventListener('click', function () {
+            modal.style.display = 'none'
+        })
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none"
+            }
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark');
+        }
+    });
+
+</script>
+
+</html>

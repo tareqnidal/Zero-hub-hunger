@@ -1,0 +1,30 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.info-title {
+  color: #109775;
+  size: 6em;
+  align-items: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  font-size: 22px;
+}
+
+ul li {
+  background: #f9f9f9;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-left: 5px solid #109775;
+}
+
+ul li strong {
+  display: block;
+  color: #109775;
+}

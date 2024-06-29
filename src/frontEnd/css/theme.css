@@ -1,0 +1,49 @@
+body.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark .header {
+  background-color: #222;
+  border-bottom: 1px solid #444;
+}
+
+body.dark p,
+body.dark {
+  color: white;
+}
+
+body.dark .infoLinks{
+  background: #312e2e ;
+
+} 
+
+body.dark .posts .post small {
+  color: #fff;
+}
+
+body.dark .modal-content {
+  background: #333 ;
+}
+
+body.dark a{
+  color: aquamarine;
+}
+
+body.dark .donation-title{
+  color: rgb(248, 243, 243);
+  
+}
+
+body.dark .reply{
+  background: #868684;
+}
+
+body.dark .expires-soon{
+  color: #aa3939;
+}
+
+
+body.dark .donation-item{
+  background-color:#868684 ;
+}

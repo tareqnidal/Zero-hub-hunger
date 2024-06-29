@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head') %>
+<%- include('header') %>
+
+<div class="container">
+    <h1 class="page-title">Add a Donation Item</h1>
+    <form action="/add-donation-item" method="post" class="add-donation-form">
+        <div class="form-group">
+            <label for="title">Item Title</label>
+            <input type="text" id="title" name="title" required placeholder="Title">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4" required placeholder="Description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" required placeholder="Quantity">
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+                <option value="">Select Category</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Baked Goods">Baked Goods</option>
+                <option value="Non-perishables">Non-perishables</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Meat">Meat</option>
+                <option value="Seafood">Seafood</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Frozen Foods">Frozen Foods</option>
+                <option value="Condiments">Condiments</option>
+                <option value="Grains">Grains</option>
+                <option value="Spices">Spices</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="expirationDate">Expiration Date (optional)</label>
+            <input type="date" id="expirationDate" name="expirationDate">
+        </div>
+
+        <div class="form-group">
+            <label for="pickupInstruction">Pickup Instruction</label>
+            <textarea id="pickupInstruction" name="pickupInstruction" rows="4" required
+                placeholder="Pickup Instruction"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option value="available">Available</option>
+                <option value="soon available">Available Soon</option>
+                <option value="not available">Not Available</option>
+            </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Add Item</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var today = new Date();
+        var dd = today.getDate() + 3; // Adjusted to 3 days from the current date
+        var mm = today.getMonth() + 1; // January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var minDate = yyyy + '-' + mm + '-' + dd;
+        document.getElementById('expirationDate').setAttribute('min', minDate);
+    });
+
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark');
+        }
+    });
+
+</script>
+
+</html>

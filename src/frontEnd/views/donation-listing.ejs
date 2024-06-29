@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('head') %>
+<%- include('header') %>
+<div class="donations-page-head">
+    <% if (!locals.items || locals.items.length === 0) { %>
+    <p class="noDonation">No donations found.</p>
+    <% } else { %>
+    <div class="donations-page<%= locals.items.length === 1 ? ' single' : '' %>">
+        <% locals.items.forEach(function(item) { %>
+        <div class="donation-item <%= (new Date(item.expirationDate) - new Date() <= 3 * 24 * 60 * 60 * 1000) ? 'expires-soon' : '' %>"
+            id="donation-<%= item.id %>">
+            <h4 class="donation-title"><%= item.title %></h4>
+            <ol>
+                <li><strong>Description:</strong> <%= item.description %></li>
+                <li><strong>Quantity:</strong> <%= item.quantity %></li>
+                <li><strong>Category:</strong> <%= item.category %></li>
+                <li><strong>Expiration Date:</strong>
+                    <%= item.expirationDate ? new Date(item.expirationDate).toLocaleDateString() : 'N/A' %></li>
+                <li><strong>Pickup Instructions:</strong> <%= item.pickupInstruction %></li>
+                <li><strong>Status:</strong> <%= item.status %></li>
+                <li><strong>Donated By:</strong> <%= item.donatedBy %></li>
+                <% if (new Date(item.expirationDate) - new Date() <= 3 * 24 * 60 * 60 * 1000) { %>
+                <li>Expires Soon</li>
+                <% } %>
+            </ol>
+            <% if (item.donatedBy === locals.user.name) { %>
+            <div class="button-group">
+                <button class="remove-button" data-item-id="<%= item.id %>">Delete</button>
+                <form action="/edit-donation-item/<%= item.id %>" method="get" style="display:inline;">
+                    <button type="submit" class="edit-button">Edit</button>
+                </form>
+            </div>
+            <% } %>
+        </div>
+        <% }); %>
+    </div>
+    <% } %>
+</div>
+
+<!-- Modal HTML -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Are you sure you want to delete this item?</p>
+        <button id="confirmRemove" class="confirm-button">Yes</button>
+        <button id="cancelRemove" class="cancel-button">No</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark');
+        }
+
+        var modal = document.getElementById("confirmationModal");
+        var span = document.getElementsByClassName("close")[0];
+        var confirmButton = document.getElementById("confirmRemove");
+        var cancelButton = document.getElementById("cancelRemove");
+        var itemIdToRemove = null;
+
+        document.querySelectorAll('.remove-button').forEach(button => {
+            button.addEventListener('click', function () {
+                itemIdToRemove = this.dataset.itemId;
+                modal.style.display = "block";
+            });
+        });
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        cancelButton.onclick = function() {
+            modal.style.display = "none";
+            itemIdToRemove = null;
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                itemIdToRemove = null;
+            }
+        }
+
+        confirmButton.onclick = function() {
+            if (itemIdToRemove) {
+                fetch('/remove-item', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ itemId: itemIdToRemove }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('donation-' + itemIdToRemove).remove();
+                    } else {
+                        alert('Failed to remove item: ' + data.message);
+                    }
+                    modal.style.display = "none";
+                    itemIdToRemove = null;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    modal.style.display = "none";
+                    itemIdToRemove = null;
+                });
+            }
+        }
+    });
+</script>
+
+</html>

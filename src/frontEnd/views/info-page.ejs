@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head') %>
+<%- include('header') %>
+
+<div class="container">
+    <h1 class="info-title"> Welcome to Zero Hunger Hub</h1>
+    <p>Our mission is to connect local businesses, individuals, and charitable organizations to streamline food
+        donations, ensuring surplus food reaches those in need rather than going to waste. Here's how you can contribute
+        to and benefit from our platform:</p>
+
+    <ul>
+        <li class="infoLinks"><strong>Explore Donation Listings:</strong> Browse through<a href="/donation-listing"
+                class="add-donation-link"> listings of available food donations.</a> If you're
+            in need or know someone who is, you can find and request donations easily.</li>
+        <li class="infoLinks">
+            <strong>Add Donation Items:</strong> Have surplus food? You can
+            <a href="/add-donation-item" class="add-donation-link">add your donation</a> to our platform, making it
+            available for community organizations or individuals in need.
+        </li>
+        <li class="infoLinks"><strong>Learn and Educate:</strong> Access our <a href="/edu-rec" class="add-donation-link"> educational
+                resources</a> on sustainable eating, reducing food
+            waste, and the importance of nutrition.</li>
+        <li class="infoLinks"><strong>Join the Community Board:</strong> <a href="/community-board" class="add-donation-link"> Share your
+                experiences,</a> ask questions, and offer tips on reducing
+            hunger and improving nutrition within your community.</li>
+
+    </ul>
+
+    <p>Together, we can make a difference one meal, one educational article, and one community initiative at a time.
+        Join us in our mission to eradicate hunger and foster a sustainable future.</p>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark');
+        }
+    });
+
+</script>
+
+
+</html>

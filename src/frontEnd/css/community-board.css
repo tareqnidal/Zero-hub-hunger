@@ -1,0 +1,199 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.container #description {
+  font-size: 22px;
+}
+
+.post-form textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.edit {
+  min-height: 200px;
+}
+
+.reply-form textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.post-form button {
+  padding: 10px 20px;
+  background-color: #616060;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: bold;
+}
+
+.post-form button:hover {
+  background-color: black;
+  color: white;
+}
+
+.posts .post {
+  border-bottom: 1px solid #ccc;
+  padding: 20px 0;
+}
+
+.posts .post:last-child {
+  border-bottom: none;
+}
+
+.posts .post p {
+  margin: 0 0 10px;
+  font-size: 19px;
+}
+
+.posts .post small {
+  display: block;
+  margin-top: 10px;
+  color: #666;
+}
+
+/* Container for edit and delete options */
+.edit-delete-options {
+  margin-top: 10px;
+}
+
+#edit-button-out,
+#cancel,
+#edit-button,
+#reply-edit-button,
+#cancel-reply,
+#delete-post,
+#delete-reply {
+  background-color: #666;
+  /* Red */
+  color: white;
+  padding: 8px 16px;
+  margin: 4px 2px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  display: inline-block;
+}
+
+/* Hover effects for buttons and links */
+.edit-delete-options button:hover,
+.edit-delete-options a:hover {
+  opacity: 0.8;
+}
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  /* Could be more or less, depending on screen size */
+}
+
+#confirmDelete,
+#cancelDelete {
+  background-color: #888;
+  color: white;
+  padding: 8px 16px;
+  margin: 4px 2px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  display: inline-block;
+}
+
+
+#cancelDelete:hover,
+#edit-button-out:hover,
+#cancel:hover,
+#edit-button:hover,
+#reply-edit-button:hover,
+#cancel-reply:hover {
+  background-color: black;
+  color: white;
+}
+
+#confirmDelete:hover,
+#delete-post:hover,
+#delete-reply:hover {
+  background-color: red;
+  color: white;
+}
+
+.replybtn {
+  padding: 10px 20px;
+  background-color: #616060;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.replybtn:hover {
+  background-color: black;
+  color: white;
+}
+
+.reply {
+  background: #eee9db;
+  margin-top: 10px;
+}
+
+#reply-text{
+  margin: 5px;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <img src="/images/logo.webp" alt="Logo" class="logo">
+
+    <div id="navbar" class="navbar">
+        <ul>
+            <a href="/"><img src="/images/home.jpg" alt="Home">
+                <span>Home</span></a>
+        </ul>
+        <ul>
+            <a href="/info-page"><img src="/images/info.webp" alt="info">
+                <span>Info</span></a>
+        </ul>
+        <ul>
+            <a href="/edu-rec"><img src="/images/edu-rec.webp" alt="educational&recourses">
+                <span>Educational&Recourses</span></a>
+        </ul>
+
+        <ul>
+            <a href="/community-board"><img src="/images/community-board.webp" alt="community-board">
+                <span>Community&Board</span></a>
+        </ul>
+
+        <% if (user) { %>
+        <ul>
+            <a href="/donation-listing"><img src="/images/donation-listing.webp" alt="donation-listing">
+                <span>Donations</span></a>
+        </ul>
+        <ul>
+            <a href="/add-donation-item"><img src="/images/addItem.webp" alt="Add Item">
+                <span>Add Item</span></a>
+        </ul>
+
+        <ul>
+            <a href="/profile"><img src="/images/profile.jpg" alt="profile">
+                <span>Profile</span></a>
+        </ul>
+
+        <ul>
+            <a href="/logout"><img src="/images/logout.webp" alt="Logout">
+                <span>Logout</span></a>
+        </ul>
+        <% } else { %>
+        <ul>
+            <a href="/login"><img src="/images/login.webp" alt="Login">
+                <span>Login</span></a>
+        </ul>
+        <ul>
+            <a href="/register"><img src="/images/register.webp" alt="Register">
+                <span>Register</span></a>
+        </ul>
+        <% } %>
+    </div>
+</header>
+
+<%- include('flashMessage') -%>
+
+</html>

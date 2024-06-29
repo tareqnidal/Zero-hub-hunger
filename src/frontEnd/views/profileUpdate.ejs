@@ -1,0 +1,27 @@
+<%- include('head') %>
+<%- include('header') %>
+<h1 class="info-title-profile">Update Profile</h1>
+<div class="profile-info">
+    <form class="profile-info-update" action="/profile/update" method="post">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" value="<%= user.firstName %>" required>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" value="<%= user.lastName %>" required>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="<%= user.username %>" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<%= user.email %>" required>
+        <button type="submit" class="register-btn">Save Changes</button>
+      </form>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark');
+        }
+    });
+
+</script>
+

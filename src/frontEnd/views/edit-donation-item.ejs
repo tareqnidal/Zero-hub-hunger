@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head') %>
+<%- include('header') %>
+
+<div class="container">
+    <h1 class="page-title">Edit Donation Item</h1>
+    <form action="/edit-donation-item/<%= item.id %>" method="post" class="edit-donation-form">
+        <div class="form-group">
+            <label for="title">Item Title</label>
+            <input type="text" id="title" name="title" required placeholder="Title" value="<%= item.title %>">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4" required
+                placeholder="Description"><%= item.description %></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" required placeholder="Quantity"
+                value="<%= item.quantity %>">
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+                <option value="">Select Category</option>
+                <option value="Vegetables" <%= item.category === 'Vegetables' ? 'selected' : '' %>>Vegetables</option>
+                <option value="Fruits" <%= item.category === 'Fruits' ? 'selected' : '' %>>Fruits</option>
+                <option value="Baked Goods" <%= item.category === 'Baked Goods' ? 'selected' : '' %>>Baked Goods
+                </option>
+                <option value="Non-perishables" <%= item.category === 'Non-perishables' ? 'selected' : '' %>>
+                    Non-perishables</option>
+                <option value="Dairy" <%= item.category === 'Dairy' ? 'selected' : '' %>>Dairy</option>
+                <option value="Meat" <%= item.category === 'Meat' ? 'selected' : '' %>>Meat</option>
+                <option value="Seafood" <%= item.category === 'Seafood' ? 'selected' : '' %>>Seafood</option>
+                <option value="Snacks" <%= item.category === 'Snacks' ? 'selected' : '' %>>Snacks</option>
+                <option value="Beverages" <%= item.category === 'Beverages' ? 'selected' : '' %>>Beverages</option>
+                <option value="Frozen Foods" <%= item.category === 'Frozen Foods' ? 'selected' : '' %>>Frozen Foods
+                </option>
+                <option value="Condiments" <%= item.category === 'Condiments' ? 'selected' : '' %>>Condiments</option>
+                <option value="Grains" <%= item.category === 'Grains' ? 'selected' : '' %>>Grains</option>
+                <option value="Spices" <%= item.category === 'Spices' ? 'selected' : '' %>>Spices</option>
+                <option value="Other" <%= item.category === 'Other' ? 'selected' : '' %>>Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="expirationDate">Expiration Date (optional)</label>
+            <input type="date" id="expirationDate" name="expirationDate"
+                value="<%= item.expirationDate ? new Date(item.expirationDate).toISOString().substr(0, 10) : '' %>">
+        </div>
+
+        <div class="form-group">
+            <label for="pickupInstruction">Pickup Instruction</label>
+            <textarea id="pickupInstruction" name="pickupInstruction" rows="4" required
+                placeholder="Pickup Instruction"><%= item.pickupInstruction %></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option value="available" <%= item.status === 'available' ? 'selected' : '' %>>Available</option>
+                <option value="soon available" <%= item.status === 'soon available' ? 'selected' : '' %>>Available Soon
+                </option>
+                <option value="not available" <%= item.status === 'not available' ? 'selected' : '' %>>Not Available
+                </option>
+            </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Update Item</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark');
+        }
+    });
+
+</script>
+
+</html>

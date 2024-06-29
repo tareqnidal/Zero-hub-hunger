@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<%- include('head') %>
+<%- include('header') %>
+
+<label class="switch">
+    <input type="checkbox">
+    Dark mode: <span class="slider"></span>
+</label>
+
+<div class="switch">
+    <select id="selectedLanguage">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="ar">Arabic</option>
+        <option value="se">Swedish</option>
+    </select>
+</div>
+
+
+
+
+<div id="home" class="home">
+    <% if (user) { %>
+    <p id="welcomeMsg">Welcome, <%= user.username%></p>
+    <% } else { %>
+    <p id="welcomeMsguest">Welcome, Guest</p>
+    <% } %> %>
+    <h1 id="pageTitle"> Zero Hunger Hub </h1>
+    <img src="/images/homeImg.webp" alt="Home Image">
+
+    <p id="first"></p>
+
+    <p id="second"><br></p>
+
+    <p id="third"><br><br><br></p>
+
+    <p id="forth"><br> <br></p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var themeToggleButton = document.querySelector('.slider');
+        var bodyElement = document.body;
+        var currentTheme = localStorage.getItem('theme');
+
+        // Initialize the correct theme
+        if (currentTheme === 'dark') {
+            bodyElement.classList.add('dark');
+            document.querySelector('.switch input[type="checkbox"]').checked = true;
+        } else {
+            bodyElement.classList.remove('dark');
+        }
+
+        // Toggle the theme and update local storage
+        themeToggleButton.addEventListener('click', function () {
+            if (bodyElement.classList.contains('dark')) {
+                bodyElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                bodyElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    });
+
+</script>
+
+<script>
+    // Initialize the user data from the EJS-rendered variables
+    var user = {
+        username: "<%= user ? user.username : 'Guest' %>"
+    };
+
+    var translations = {
+        'pageTitle': {
+            'en': 'Zero Hunger Hub',
+            'es': 'Centro Sin Hambre',
+            'fr': 'Centre Zero Faim',
+            'ar': 'مركز القضاء على الجوع',
+            'se': 'Zero Hunger Hub'
+        },
+        'welcomeMsg': {
+            'en': user => `Welcome, ${user.username}`,
+            'es': user => `Bienvenido, ${user.username}`,
+            'fr': user => `Bienvenue, ${user.username}`,
+            'ar': user => `مرحباً, ${user.username}`,
+            'se': user => `Välkommen, ${user.username}`
+        },
+        'welcomeMsguest':{
+            'en': `Welcome, guest`,
+            'es': `Bienvenido, invitado`,
+            'fr': `Bienvenue, invité`,
+            'ar': `مرحباً بك أيها الضيف`,
+            'se': `Välkommen, gäst`
+        },
+        'first': {
+            'en': 'Welcome to Zero Hunger Hub a collaborative platform dedicated to enhance food security, and fostering sustainable agricultural practices within our communities. Driven by the United Nations Sustainable Development Goal 2, we aim to create a world where access to nutritious food is a universal right, not a privilege.',
+            'es': 'Bienvenidos a Zero Hunger Hub - una plataforma colaborativa dedicada a mejorar la seguridad alimentaria y fomentar prácticas agrícolas sostenibles dentro de nuestras comunidades. Impulsados por el Objetivo de Desarrollo Sostenible 2 de las Naciones Unidas, nuestro objetivo es crear un mundo donde el acceso a alimentos nutritivos sea un derecho universal, no un privilegio.',
+            'fr': 'Bienvenue sur Zero Hunger Hub  une plateforme collaborative dédiée à lamélioration de la sécurité alimentaire et à la promotion de pratiques agricoles durables au sein de nos communautés. Animés par l´Objectif de développement durable 2 des Nations Unies, nous visons à créer un monde où l accès à une nourriture nutritive est un droit universel, et non un privilège. ',
+            'ar': 'مرحباً بكم في مركز القضاء على الجوع - وهي منصة تعاونية تهدف إلى تعزيز الأمن الغذائي وتعزيز الممارسات الزراعية المستدامة داخل مجتمعاتنا. انطلاقاً من هدف التنمية المستدامة الثاني للأمم المتحدة ، نهدف إلى خلق عالم يكون فيه الوصول إلى الغذاء المغذي حقًا عالميًا وليس امتيازًا. ',
+            'se': 'Välkommen till Zero Hunger Hub, en samarbetsplattform som ägnar sig åt att förbättra livsmedelsförsörjningen och främja hållbara jordbruksmetoder inom våra samhällen. Drivna av FN:s mål för hållbar utveckling nr 2 strävar vi efter att skapa en värld där tillgång till näringsrik mat är en universell rättighet, inte ett privilegium.'
+        },
+        'second': {
+            'en': 'At Zero Hunger Hub, we connect local businesses, individuals, and charitable organizations to streamline food donations, ensuring surplus food reaches those in need rather than going to waste. Our platform serves as a beacon of hope and action, empowering communities to participate in food drives, educational workshops, and sustainable eating practices that contribute to the well-being of our planet and its inhabitants.',
+            'es': 'En Zero Hunger Hub, conectamos a empresas locales, personas y organizaciones benéficas para agilizar las donaciones de alimentos, garantizando que el excedente de alimentos llegue a los necesitados en lugar de desperdiciarse. Nuestra plataforma sirve como un faro de esperanza y acción, empoderando a las comunidades para que participen en colectas de alimentos, talleres educativos y prácticas de alimentación sostenible que contribuyen al bienestar de nuestro planeta y sus habitantes.',
+            'fr': 'Chez Zero Hunger Hub, nous mettons en relation les entreprises locales, les particuliers et les organisations caritatives afin de rationaliser les dons alimentaires, en veillant à ce que les excédents alimentaires parviennent aux personnes dans le besoin plutôt que dêtre gaspillés. Notre plateforme est un symbole despoir et daction, permettant aux communautés de participer à des collectes de nourriture, à des ateliers éducatifs et à des pratiques alimentaires durables qui contribuent au bien-être de notre planète et de ses habitants.  ',
+            'ar': 'في مركز القضاء على الجوع ، نعمل على ربط الشركات المحلية والأفراد والمؤسسات الخيرية لتبسيط التبرعات الغذائية ، مما يضمن وصول الطعام الفائض إلى المحتاجين بدلاً من إهداره. تعمل منصتنا كمنارة للأمل والعمل ، وتمكين المجتمعات من المشاركة في حملات الأغذية وورش العمل التعليمية والممارسات الغذائية المستدامة التي تساهم في رفاهية كوكبنا وسكانه.',
+            'se': 'På Zero Hunger Hub kopplar vi samman lokala företag, individer och välgörenhetsorganisationer för att effektivisera matdonationer. Detta säkerställer att överskottsmat når dem som behöver det mest, istället för att slängas. Vår plattform fungerar som en ledstjärna för hopp och handling, och ger våra samhällen möjlighet att delta i matinsamlingar, utbildningsworkshops och hållbara matvanor. Detta bidrar till både vår planets och dess invånares välbefinnande.'
+        },
+        'third': {
+            'en': 'Through educational resources, we strive to enlighten our visitors about the importance of nutrition, the impacts of food waste, and the steps we can all take to promote sustainable consumption. Our community board and interactive map enable users to share experiences, find local opportunities for involvement, and celebrate the collective impact of their actions.',
+            'es': 'A través de recursos educativos, nos esforzamos por informar a nuestros visitantes sobre la importancia de la nutrición, los impactos del desperdicio de alimentos y los pasos que todos podemos tomar para promover el consumo sostenible. Nuestro tablón comunitario y el mapa interactivo permiten a los usuarios compartir experiencias, encontrar oportunidades locales de participación y celebrar el impacto colectivo de sus acciones.',
+            'fr': 'Grâce à des ressources pédagogiques, nous nous efforçons de sensibiliser nos visiteurs à limportance de la nutrition, aux impacts du gaspillage alimentaire et aux mesures que nous pouvons tous prendre pour promouvoir une consommation durable. Notre tableau communautaire et notre carte interactive permettent aux utilisateurs de partager leurs expériences, de trouver des opportunités dengagement local et de célébrer limpact collectif de leurs actions. ',
+            'ar': 'من خلال الموارد التعليمية ، نسعى إلى توعية زوارنا بأهمية التغذية وتأثيرات مهدر الطعام والخطوات التي يمكننا جميعًا اتخاذها لتعزيز الاستهلاك المستدام. يتيح لوحة مجتمعنا والخريطة التفاعلية للمستخدمين مشاركة الخبرات ، والعثور على فرص للمشاركة المحلية ، والاحتفال بالآثار الجماعية لأفعالهم. ',
+            'se': 'Genom utbildningsmaterial försöker vi upplysa våra besökare om vikten av näring, konsekvenserna av matsvinn och stegen vi alla kan ta för att främja hållbar konsumtion. Vår anslagstavla och interaktiva karta gör det möjligt för användare att dela erfarenheter, hitta lokala engagemangsmöjligheter och fira den kollektiva påverkan av sina handlingar.'
+        },
+        'forth': {
+            'en': 'to eradicate hunger and foster a sustainable future. Together, we can make a difference one meal, one educational article, and one community initiative at a time. Welcome to the hub of change. Welcome to Zero Hunger Hub',
+            'es': 'Para erradicar el hambre y fomentar un futuro sostenible. Juntos podemos marcar la diferencia, una comida, un artículo educativo y una iniciativa comunitaria a la vez. Bienvenidos al centro del cambio. Bienvenidos a Zero Hunger Hub.',
+            'fr': ' Pour éradiquer la faim et favoriser un avenir durable. Ensemble, nous pouvons faire la différence, un repas, un article éducatif et une initiative communautaire à la fois. Bienvenue au centre du changement. Bienvenue sur Zéro Faim Hub.',
+            'ar': 'لقضاء على الجوع وتعزيز مستقبل مستدام. معا ، يمكننا أن نصنع فرقا وجبة واحدة ، ومقالة تعليمية واحدة ، ومبادرة مجتمعية واحدة في كل مرة. مرحبًا بكم في مركز التغيير. مرحبًا بكم في مركز القضاء على الجوع.',
+            'se': 'För att utrota hunger och främja en hållbar framtid. Tillsammans kan vi göra skillnad, en måltid, en utbildningsartikel och ett lokalt initiativ i taget. Välkommen till förändringens nav. Välkommen till Zero Hunger Hub.'
+        },
+        'missionLink': {
+            'en': 'Join us in our mission!',
+            'es': 'Únase a nuestra misión!',
+            'fr': 'Rejoignez notre mission!',
+            'ar': 'انضم إلى مهمتنا!',
+            'se': 'Bli en del av vår mission!'
+        },
+    };
+
+    function translate(language) {
+        for (var key in translations) {
+            var elem = document.getElementById(key);
+            if (elem) {
+                var content = translations[key][language];
+                if (typeof content === "function") {
+                    elem.textContent = content(user);
+                } else {
+                    // Clear existing content to avoid duplication
+                    elem.textContent = '';
+                    if (key === 'forth') {
+                        var link = document.createElement('a');
+                        link.href = '/register';
+                        link.className = 'homeReg';
+                        link.textContent = translations['missionLink'][language] +
+                            ' '; // Set translated link text and add space
+                        elem.appendChild(link); // Append the anchor tag at the beginning
+
+                        // Append the rest of the content
+                        var textNode = document.createTextNode(' ' + content +
+                            '.'); // Add a space before and a period after
+                        elem.appendChild(textNode);
+                    } else {
+                        elem.textContent = content;
+                    }
+                }
+            }
+        }
+        localStorage.setItem('selectedLanguage', language);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var storedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        translate(storedLanguage);
+        var languageSelector = document.getElementById('selectedLanguage');
+        languageSelector.value = storedLanguage;
+        languageSelector.addEventListener('change', function () {
+            changeLanguage(this.value);
+        });
+    });
+
+    function changeLanguage(language) {
+        translate(language);
+    }
+
+</script>
+
+
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<%- include('head') %>
+<%- include('header') %>
+
+<h1 class="info-title-profile">Profile</h1>
+<section class="profile-info">
+    <% if (user) { %>
+    <dl>
+        <dt>First Name:</dt>
+        <dd><%= user.firstName %></dd>
+        <dt>Last Name:</dt>
+        <dd><%= user.lastName %></dd>
+        <dt>Username:</dt>
+        <dd><%= user.username %></dd>
+        <dt>Email:</dt>
+        <dd><%= user.email %></dd>
+    </dl>
+    <!-- Using a button with JavaScript for redirection -->
+    <button onclick="location.href='/profile/update'" class="register-btn">Update Profile</button>
+    <% } else { %>
+    <p>No user data available.</p>
+    <% } %>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark');
+        }
+    });
+
+</script>
+
+</html>
